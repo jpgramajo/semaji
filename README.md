@@ -1,6 +1,6 @@
 # Semaji: Interacción Conversacional Fluida y Procesamiento Local
 
-Semaji (del swahili: "Aquel que habla") es un agente de IA diseñado para lograr una comunicación fluida y natural sin depender de servidores externos. El proyecto busca facilitar diálogos dinámicos que ocurren íntegramente de forma local, permitiendo que la inteligencia resida en tu propio hardware con una latencia mínima y privacidad absoluta.
+Semaji (del swahili: "Aquel que habla") es un agente de IA diseñado para lograr una comunicación fluida y natural por audio sin depender de servidores externos. El proyecto busca facilitar diálogos dinámicos que ocurren íntegramente de forma local, permitiendo que la inteligencia resida en tu propio hardware con una latencia mínima y privacidad absoluta.
 
 A través de una arquitectura optimizada para la concurrencia, Semaji permite una interacción orgánica donde la IA procesa el lenguaje y ejecuta la voz de forma simultánea. Al funcionar totalmente offline, se eliminan los tiempos de espera por red y se garantiza que cada conversación sea privada, rápida y siempre disponible, incluso sin conexión a internet.
 

@@ -1,39 +1,42 @@
-# Semaji: Interactua con LLMs de forma natural y privada
+# Semaji: Interacción Conversacional Fluida y Procesamiento Local
 
-Semaji (del swahili: "el que habla") es un asistente de voz pensado para que charlar con un LLM se sienta fluido y real. A diferencia de otros sistemas, Semaji funciona totalmente en tu equipo (offline), por lo que tus conversaciones no salen de tu dispositivo y las respuestas son más rápidas al no depender de internet.
+Semaji (del swahili: "Aquel que habla") es un agente de IA diseñado para lograr una comunicación fluida y natural sin depender de servidores externos. El proyecto busca facilitar diálogos dinámicos que ocurren íntegramente de forma local, permitiendo que la inteligencia resida en tu propio hardware con una latencia mínima y privacidad absoluta.
 
-El proyecto se enfoca en que la charla sea orgánica: la IA puede "hablar" mientras sigue "pensando", evitando esas pausas largas que cortan la comunicación.
+A través de una arquitectura optimizada para la concurrencia, Semaji permite una interacción orgánica donde la IA procesa el lenguaje y ejecuta la voz de forma simultánea. Al funcionar totalmente offline, se eliminan los tiempos de espera por red y se garantiza que cada conversación sea privada, rápida y siempre disponible, incluso sin conexión a internet.
 
-## 🌟 El objetivo: Una charla más natural
-No buscamos solo un asistente que interactue, sino un compañero capaz de:
-* Mantener conversaciones coherentes y con contexto.
-* Interactuar con su entorno (usar herramientas para controlar luces, archivos o sensores).
-* Ver y escuchar (multimodalidad) para entender mejor lo que pasa a su alrededor.
+## 🛠️ Especificaciones Técnicas y Arquitectura
 
-## 🚀 Probado en hardware real
-Este sistema ha sido probado con éxito en una NVIDIA Jetson AGX Xavier Dev Kit (32GB), logrando que modelos como Gemma 3 (12B) y Whisper funcionen al mismo tiempo sin problemas.
+El sistema utiliza una arquitectura de hilos concurrentes (*Multi-threading*) para maximizar el rendimiento del hardware y mantener la estabilidad del flujo de audio:
 
-## ✨ ¿Qué hace ahora?
-* Micrófono siempre activo: No hay errores al abrir o cerrar el audio; siempre está listo para escucharte.
-* Voz rápida: Empieza a hablar en cuanto detecta un signo de puntuación, lo que hace la respuesta mucho más ágil.
-* Privacidad total: Todo se queda en tu RAM. No hay rastreo ni envío de datos a nubes externas.
+* **Motor de Inferencia LLM**: Optimizado para **Gemma 3 (12B)** a través de Ollama. Implementa una técnica de inyección de *System Prompt* mediante simulación de historial, asegurando respuestas concisas, amigables y libres de sintaxis Markdown para facilitar la lectura del TTS.
+* **Reconocimiento de Voz (STT)**: Uso de **OpenAI Whisper** (modelo medium recomendado) para una transcripción precisa de la voz del usuario en tiempo real.
+* **Síntesis de Voz por Streaming (TTS)**: Basada en **espeak-ng**. El sistema fragmenta el texto generado por el LLM en cuanto detecta signos de puntuación (. , ? !), permitiendo que la IA hable mientras sigue procesando el resto de la respuesta.
+* **Gestión de Audio Estable**: Flujo de entrada de micrófono persistente mediante **PortAudio/ALSA**, evitando errores de hardware al alternar entre captura y reproducción.
 
-## 🗺️ Lo que viene (Hoja de ruta)
-1. Voces más reales: Cambiar el tono robótico por voces con más emoción y naturalidad.
-2. Uso de herramientas: Que la IA pueda ejecutar acciones reales en tu computadora o casa.
-3. Visión: Añadir cámaras para que el agente pueda ver lo que le estás mostrando.
+## 🚀 Pruebas en Hardware (Edge Computing)
 
-## 🛠️ Requisitos
-* Ollama (con modelo gemma3:12b).
-* Whisper (para entender lo que dices).
-* Dispositivo de audio "PRO".
+Semaji ha sido probado con éxito en entornos de alto rendimiento, demostrando estabilidad y baja latencia en:
+* **Dispositivo**: NVIDIA Jetson AGX Xavier Dev Kit.
+* **Memoria**: 32GB LPDDR4x.
+* **Rendimiento**: Ejecución paralela de Gemma 3 12B y Whisper sin degradación térmica o de memoria significativa.
 
-## 💻 Instalación
-1. Clona el repo:
-   git clone https://github.com/tu-usuario/semaji.git
-2. Instala lo necesario:
+## 🗺️ Hoja de Ruta (Roadmap)
+
+La visión de Semaji es evolucionar hacia un agente totalmente autónomo:
+1. **Voz Natural de Alta Fidelidad**: Migración hacia motores de TTS neuronales con entonación emocional.
+2. **Orquestación de Herramientas (Tool Use)**: Capacidad para que el agente ejecute acciones en el sistema operativo o controle dispositivos externos.
+3. **Multimodalidad Avanzada**: Integración de visión en tiempo real para que el agente pueda comprender el entorno físico del usuario.
+
+## ⚙️ Instalación y Requisitos
+
+1. **Dependencias del sistema**: Requiere `Ollama`, `espeak-ng` y `aplay`.
+2. **Python Setup**:
+   ```bash
    pip install sounddevice soundfile numpy openai-whisper requests
-3. Ejecuta:
+   ```
+3. **Ejecución**:
+   ```bash
    python3 voice_ai_stable.py
+   ```
 
-Semaji - Tu voz, tus datos, tu hardware.
+Semaji — Tu voz, tus datos, tu hardware.
